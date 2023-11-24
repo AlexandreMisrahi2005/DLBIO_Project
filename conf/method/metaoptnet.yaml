@@ -1,0 +1,17 @@
+defaults:
+  - meta_base
+
+# base_learner: ridge for rigdge regression as base learner
+base_learner: ridge 
+C_reg: 0.1 # only relevant for svm
+maxIter: 3  # only relevant for svm
+lambda_reg: 50.0 # only relevant for ridge regression
+
+cls:
+  _target_: methods.metaoptnet.MetaOptNet
+  base_learner: ${method.base_learner}
+  C_reg: ${method.C_reg}
+  lambda_reg: ${method.lambda_reg}
+  maxIter: ${method.maxIter}
+
+name: metaoptnet
