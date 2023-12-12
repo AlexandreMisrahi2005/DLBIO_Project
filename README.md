@@ -1,3 +1,62 @@
+# Extending the few-shot benchmark by Meta-Learning with Differentiable Convex Optimization
+
+## Implementation
+
+Our implementation of MetaOptNet (adapted from [MetaOptNet](https://github.com/kjunelee/MetaOptNet)) is located in ```methods/metaoptnet.py``` and the corresponding hyperparameters can be adapted in ```conf/method/metaoptnet.yaml```. 
+
+## Instructions to run our experiments in Google Cloud
+
+We used a high-memory (52GB) machine with 8 cores, and 1 Nvidia T4 GPU. <br>
+1. Download conda
+```
+mkdir -p ~/miniconda3
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
+bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
+rm -rf ~/miniconda3/miniconda.sh
+```
+
+2. Initialize bash and zsh shells
+```
+~/miniconda3/bin/conda init bash
+~/miniconda3/bin/conda init zsh
+```
+
+3. Download and install CUDA drivers + check if installation is successful
+```
+curl https://raw.githubusercontent.com/GoogleCloudPlatform/compute-gpu-installation/main/linux/install_gpu_driver.py --output install_gpu_driver.py
+sudo python3 install_gpu_driver.py
+nvidia-smi
+```
+
+4. Clone this repo and cd into the project
+```
+git clone https://github.com/AlexandreMisrahi2005/DLBIO_Project.git
+cd DLBIO_Project
+```
+
+5. Create and activate conda environment
+```
+conda env create -f environment.yml
+conda activate fewshotbench
+```
+
+6. Activate ```wandb``` with ```wandb login``` (change the login entity in ```conf/main.yaml```)
+7. Download SwissProt dataset 
+```
+pip install gdown
+gdown --id 1a3IFmUMUXBH8trx_VWKZEGteRiotOkZS
+sudo apt-get install unzip
+unzip swissprot.zip
+```
+
+8. Run experiment scripts
+```
+chmod +x scripts/name_of_script_to_run
+scripts/name_of_script_to_run
+```
+
+
+#### Below is the initial README.md content
 # Few Shot Benchmark for Biomedical Datasets
 
 
